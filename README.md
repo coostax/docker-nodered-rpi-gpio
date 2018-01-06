@@ -45,4 +45,3 @@ To stop and remove the container
 ```
 
 To see more options for the Makefile run `make`
-
