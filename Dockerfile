@@ -39,8 +39,7 @@ USER node-red
 RUN npm install node-red-admin
 
 # Install additional libs
-#RUN npm install node-red-contrib-gpio
-#RUN npm install node-red-contrib-tradfri
-#RUN npm install node-red-dashboard
-#RUN npm install node-red-contrib-ifttt
-
+RUN npm install node-red-contrib-gpio
+RUN npm install node-red-contrib-tradfri
+RUN npm install node-red-dashboard
+RUN npm install node-red-contrib-ifttt

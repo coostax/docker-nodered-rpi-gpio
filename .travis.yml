@@ -7,14 +7,11 @@ script:
 - docker run --rm --privileged multiarch/qemu-user-static:register --reset
 # build image
 - docker build -t coostax/nodered-rpi-gpio .
-# test image
-- docker run coostax/nodered-rpi-gpio npm info
+# test image - to be done
+#- docker run coostax/nodered-rpi-gpio npm info
 # push image
 - >
   if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
-    TAG=$(jq '.version' package.json)
-    docker tag coostax/nodered-rpi-gpio coostax/nodered-rpi-gpio:$TAG
-    docker push coostax/nodered-rpi-gpio:$TAG
     docker push coostax/nodered-rpi-gpio
   fi
