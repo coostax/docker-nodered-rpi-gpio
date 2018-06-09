@@ -1,4 +1,7 @@
-#based on node-red/node-red-docker:rpi
+#--------------------------------------------------
+# Docker node-red image for raspberry pi
+# based on node-red/node-red-docker:rpi
+#--------------------------------------------------
 FROM nodered/node-red-docker:rpi
 MAINTAINER Paulo Costa <coostax@gmail.com>
 
@@ -43,3 +46,5 @@ RUN npm install node-red-contrib-gpio
 RUN npm install node-red-contrib-tradfri
 RUN npm install node-red-dashboard
 RUN npm install node-red-contrib-ifttt
+RUN npm install node-red-contrib-google-home-notify
+RUN npm install node-red-contrib-slack
