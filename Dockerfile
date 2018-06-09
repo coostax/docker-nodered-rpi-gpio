@@ -48,3 +48,7 @@ RUN npm install node-red-dashboard
 RUN npm install node-red-contrib-ifttt
 RUN npm install node-red-contrib-google-home-notify
 RUN npm install node-red-contrib-slack
+RUN npm install node-red-contrib-dht-sensor
+RUN npm install node-red-contrib-gpio
+RUN npm install node-red-contrib-redis
+RUN npm install node-red-node-email
