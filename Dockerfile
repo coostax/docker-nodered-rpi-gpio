@@ -34,6 +34,17 @@ RUN pip install wiringpi2
 # Install python rpi - TODO find way to install documentation
 RUN pip install RPi.GPIO
 
+# Install bcm2835 library
+WORKDIR /tmp
+RUN curl http://www.airspayce.com/mikem/bcm2835/bcm2835-1.56.tar.gz | tar xz
+cd bcm2835-1.*
+./configure
+make
+sudo make check
+sudo make install
+
+
+
 WORKDIR /usr/src/node-red
 
 USER node-red
