@@ -22,7 +22,7 @@ RUN apt-get update && apt-get install -y \
 # Add node-red user so we aren't running as root.
 # Set home director for Node-RED app source
 # Set user data directory for flows configs and nodes
-RUN mkdir -p /usr/src/node-red && mkdir /data
+RUN mkdir -p /usr/src/node-red && mkdir /data \
   && useradd --home-dir /usr/src/node-red --no-create-home node-red \
   && chown -R node-red:node-red /data \
   && chown -R node-red:node-red /usr/src/node-red
