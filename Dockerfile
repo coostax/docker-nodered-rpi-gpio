@@ -4,7 +4,7 @@
 # Using build process from node-red-docker/rpi
 #--------------------------------------------------
 FROM arm32v7/node:10-slim
-MAINTAINER Paulo Costa <coostax@gmail.com>
+LABEL maintainer='Paulo Costa <coostax@gmail.com>'
 
 USER root
 
@@ -16,8 +16,8 @@ RUN apt-get update && apt-get install -y \
     python-dev \
     python-pip \
     python-virtualenv \
-    --no-install-recommends && \
-    rm -rf /var/lib/apt/lists/*
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
 # Add node-red user so we aren't running as root.
 # Set home director for Node-RED app source

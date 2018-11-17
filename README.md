@@ -1,4 +1,6 @@
 # Node-RED RPI Docker with GPIO access
+[![Build Status](https://travis-ci.org/coostax/docker-nodered-rpi-gpio.svg?branch=master)](https://travis-ci.org/coostax/docker-nodered-rpi-gpio)
+
 Node-RED docker container tailored for raspberry pi with GPIO support.
 
 ## About
