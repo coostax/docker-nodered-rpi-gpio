@@ -1,38 +1,40 @@
 #--------------------------------------------------
 # Docker node-red image for raspberry pi
-# based on node-red/node-red-docker:rpi
+# based on arm32v7/node:10-slim
+# Using build process from node-red-docker/rpi
 #--------------------------------------------------
-FROM nodered/node-red-docker:rpi
+FROM arm32v7/node:10-slim
 MAINTAINER Paulo Costa <coostax@gmail.com>
 
 USER root
 
-#update cache
-RUN apt-get update
-
 # Install python and dependencies
-RUN apt-get install -y \
+RUN apt-get update && apt-get install -y \
     git-core \
     build-essential \
     gcc \
-    python \
     python-dev \
     python-pip \
     python-virtualenv \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-# Install wiringpi
-RUN pip install pyserial
+# Add node-red user so we aren't running as root.
+# Set home director for Node-RED app source
+# Set user data directory for flows configs and nodes
+RUN mkdir -p /usr/src/node-red && mkdir /data
+  && useradd --home-dir /usr/src/node-red --no-create-home node-red \
+  && chown -R node-red:node-red /data \
+  && chown -R node-red:node-red /usr/src/node-red
+
+# Install wiringpi and python rpi
 WORKDIR /opt/wiringPi
-RUN git clone git://git.drogon.net/wiringPi .
-RUN chown -R node-red:node-red /opt/wiringPi
-RUN git pull origin && ./build
-RUN pip install wiringpi2
-
-
-# Install python rpi - TODO find way to install documentation
-RUN pip install RPi.GPIO
+RUN pip install pyserial \
+ && git clone git://git.drogon.net/wiringPi .\
+ && chown -R node-red:node-red /opt/wiringPi \
+ && git pull origin && ./build \
+ && pip install wiringpi2 \
+ && pip install RPi.GPIO
 
 # Install bcm2835 library
 WORKDIR /usr/local/lib
@@ -41,21 +43,18 @@ RUN curl http://www.airspayce.com/mikem/bcm2835/bcm2835-1.56.tar.gz | tar xz && 
   ./configure && \
   make && make install
 
-WORKDIR /usr/src/node-red
-
 USER node-red
 
-#install admin script
-RUN npm install node-red-admin
+WORKDIR /usr/src/node-red
+# Install Node-RED NPM module and node dependencies in package.json
+COPY package.json /usr/src/node-red/
+RUN npm install && npm install node-red-admin
 
-# Install additional libs
-RUN npm install node-red-contrib-gpio
-RUN npm install node-red-contrib-tradfri
-RUN npm install node-red-dashboard
-RUN npm install node-red-contrib-ifttt
-RUN npm install node-red-contrib-google-home-notify
-RUN npm install node-red-contrib-slack
-RUN npm install node-red-contrib-dht-sensor
-RUN npm install node-red-contrib-gpio
-RUN npm install node-red-contrib-redis
-RUN npm install node-red-node-email
+# User configuration directory volume
+EXPOSE 1880
+
+# Environment variable holding file path for flows configuration
+ENV FLOWS=flows.json
+ENV NODE_PATH=/usr/src/node-red/node_modules:/data/node_modules
+
+CMD ["npm", "start", "--", "--userDir", "/data"]

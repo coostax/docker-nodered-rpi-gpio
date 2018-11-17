@@ -1,6 +1,6 @@
 {
     "name": "docker-nodered-rpi-gpio",
-    "version": "0.0.1",
+    "version": "3.0.0",
     "description": "A visual tool for wiring the Internet of Things",
     "homepage": "http://nodered.org",
     "license": "MIT",
@@ -22,9 +22,19 @@
         "node-red-node-msgpack": "*",
         "node-red-node-base64": "*",
         "node-red-node-suncalc": "*",
-        "node-red-node-random": "*"
+        "node-red-node-random": "*",
+        "node-red-contrib-gpio"
+        "node-red-contrib-tradfri"
+        "node-red-dashboard"
+        "node-red-contrib-ifttt"
+        "node-red-contrib-google-home-notify"
+        "node-red-contrib-slack"
+        "node-red-contrib-dht-sensor"
+        "node-red-contrib-gpio"
+        "node-red-contrib-redis"
+        "node-red-node-email"
     },
     "engines": {
-        "node": "4.*.*"
+        "node": ">=4"
     }
 }
