@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
     python-dev \
     python-pip \
     python-virtualenv \
-    --no-install-recommends
+    --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Add node-red user so we aren't running as root.
