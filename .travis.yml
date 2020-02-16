@@ -2,11 +2,12 @@ sudo: required
 services:
 - docker
 language: bash
+before_install:
+  # prepare qemu
+  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+  # build image
+  - docker build -t coostax/nodered-rpi-gpio .
 script:
-# prepare qemu
-- docker run --rm --privileged multiarch/qemu-user-static:register --reset
-# build image
-- docker build -t coostax/nodered-rpi-gpio .
 # test image - to be done
 #- docker run coostax/nodered-rpi-gpio npm info
 # push image
