@@ -16,8 +16,7 @@ RUN apt-get update && apt-get install -y \
     python-dev \
     python-pip \
     python-virtualenv \
-    --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+    --no-install-recommends
 
 # Add node-red user so we aren't running as root.
 # Set home director for Node-RED app source
