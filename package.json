@@ -18,7 +18,7 @@
         }
     ],
     "dependencies": {
-        "node-red": "1.0.3",
+        "node-red": "^2.2.2",
         "node-red-node-msgpack": "*",
         "node-red-node-base64": "*",
         "node-red-node-suncalc": "*",
@@ -35,6 +35,6 @@
         "node-red-node-email": "*",
     },
     "engines": {
-        "node": ">=4"
+        "node": ">=14"
     }
 }
